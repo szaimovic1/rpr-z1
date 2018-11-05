@@ -1,19 +1,21 @@
 package ba.unsa.etf.rpr;
 
 public abstract class ChessPiece {
-    public static  enum Colour{
-        BLACK("BLACK"), WHITE("WHITE");
+   // ChessPiece() throws IllegalChessMoveException {};                //treba li??
 
-        private String boja;
-        Colour(String boja){
-            this.boja=boja;
+    public static  enum Color{
+        BLACK, WHITE
+
+        /*private String boja;
+        Colour(String boja){                                           //razmotriti u nastavku po potrebi
+            this.boja=boja;                                            //i moze li ovako uopste???
         }
 
         public String dajBoju(){
             return boja;
-        }
+        }*/
     }
     public abstract String getPosition();
-    public abstract Colour getColour();
+    public abstract Color getColour();
     public abstract void move(String position) throws IllegalChessMoveException;
 }
