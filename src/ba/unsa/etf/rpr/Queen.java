@@ -5,10 +5,9 @@ public class Queen extends ChessPiece {
     private String pozicija;
 
     private boolean nedozvoljenaPozicija(String pozicija){
-        if(this.pozicija.charAt(0)+1==pozicija.charAt(0)
-                || this.pozicija.charAt(0)-1==pozicija.charAt(0)
-                || this.pozicija.charAt(1)+1==pozicija.charAt(1)
-                || this.pozicija.charAt(1)-1==pozicija.charAt(1))
+        if(this.pozicija.charAt(0)==pozicija.charAt(0)
+                || this.pozicija.charAt(1)==pozicija.charAt(1)
+          || (this.pozicija.charAt(1)+(this.pozicija.charAt(0)-pozicija.charAt(0))==pozicija.charAt(1)))
             return false;                                                                 //valja to skontat...
         return true;
     }
