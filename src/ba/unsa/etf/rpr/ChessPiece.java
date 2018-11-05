@@ -15,5 +15,5 @@ public abstract class ChessPiece {
     }
     public abstract String getPosition();
     public abstract Colour getColour();
-    public abstract void move(String position);
+    public abstract void move(String position) throws IllegalChessMoveException;
 }
