@@ -77,6 +77,45 @@ class BoardTest {
     }
 
     @Test
+        // No check
+    void isCheck2() {
+        Board b = new Board();
+        try {
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
+            b.move(Queen.class, ChessPiece.Color.WHITE, "E2");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertFalse(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
+    @Test
+        // Check by queen
+    void isCheck3() {
+        Board b = new Board();
+        try {
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
+            b.move(Queen.class, ChessPiece.Color.WHITE, "E2");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F4");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F5");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F6");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "E7");
+            b.move(Pawn.class, ChessPiece.Color.WHITE, "F8");
+        } catch(Exception e) {
+            // Do nothing
+        }
+        assertTrue(b.isCheck(ChessPiece.Color.BLACK));
+    }
+
+    @Test
     // Queen, bishop and rook can't jump pieces
     void jumpPiece() {
         Board b = new Board();
