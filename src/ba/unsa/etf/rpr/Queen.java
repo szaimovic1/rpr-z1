@@ -8,8 +8,8 @@ public class Queen extends ChessPiece {
         if(this.pozicija.charAt(0)==pozicija.charAt(0)
                 || this.pozicija.charAt(1)==pozicija.charAt(1)
           || (this.pozicija.charAt(1)+(this.pozicija.charAt(0)-pozicija.charAt(0))==pozicija.charAt(1)))
-            return false;                                                                 //valja to skontat...
-        return true;
+            return false;                                                             //valja to skontat...
+        return true;                                                                 //da li je ovim regulisan i - ?????
     }
 
     Queen(String pozicija, Color boja){
