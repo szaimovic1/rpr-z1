@@ -7,7 +7,7 @@ public class Main {
                 "Pravila igre šah se smatraju da su poznata, ako nisu predlažem da se upoznate.\n" +
                 "\n" +
                 "Program treba sadržavati sljedeće klase:\n" +
-                "Apstraktnu klasu Chesspiece i iz nje izvedene klase: King, Queen, Rook, Bishop, Knight i Pawn. Apstraktna klasa treba sadržavati sljedeće metode (čije implementacije ćete eventualno prilagoditi u izvedenim klasama):\n" +
+                "Apstraktnu klasu Chesspiece i iz nje izvedene klase: King, Queen, Rook, Pawn, Knight i Pawn. Apstraktna klasa treba sadržavati sljedeće metode (čije implementacije ćete eventualno prilagoditi u izvedenim klasama):\n" +
                 "getPosition() vraća String koji predstavlja poziciju figure na tabli u obliku uobičajenom za šah npr. \"A4\", \"B5\", \"H1\" i sl.\n" +
                 "getColor() vraća boju figure; pobrojani tip Color sa vrijednostima BLACK i WHITE treba biti javni statički član klase Chesspiece;\n" +
                 "move(String position) pomjera figuru na novu poziciju; treba baciti izuzetak IllegalArgumentsException ako je pozicija van table ili nije u ispravnom formatu; ako potez nije dozvoljen za tu vrstu figure (za sada zanemarujemo ostale figure na ploči) treba baciti izuzetak tipa IllegalChessMoveException; metoda treba raditi sa velikim i malim slovima;\n" +

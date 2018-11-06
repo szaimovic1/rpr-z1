@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-public class Bishop extends ChessPiece{
+public class Pawn extends ChessPiece{
     private Color boja;
     private String pozicija;
 
@@ -19,7 +19,7 @@ public class Bishop extends ChessPiece{
         return true;                                                          //zanemarena mogucnost vracanja figure!!!!
     }
 
-    Bishop (String pozicija, Color boja){
+    Pawn(String pozicija, Color boja){
         if(nepostojecaPozicija(pozicija))
             throw new IllegalArgumentException("Nepostojeća pozicija!\n");
         this.boja=boja;

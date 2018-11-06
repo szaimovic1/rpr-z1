@@ -14,7 +14,7 @@ class BoardTest {
         assertDoesNotThrow(
                 () -> {
                     b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
-                    b.move(Bishop.class, ChessPiece.Color.WHITE, "A6");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "A6");
                     b.move(Knight.class, ChessPiece.Color.WHITE, "C3");
                     b.move(King.class, ChessPiece.Color.WHITE, "E2");
                     b.move(King.class, ChessPiece.Color.WHITE, "E3");
@@ -126,7 +126,7 @@ class BoardTest {
                 ),
                 () -> assertThrows(
                         IllegalChessMoveException.class,
-                        () -> b.move(Bishop.class, ChessPiece.Color.BLACK, "H6")
+                        () -> b.move(Pawn.class, ChessPiece.Color.BLACK, "H6")
                 ),
                 () -> assertThrows(
                         IllegalChessMoveException.class,
