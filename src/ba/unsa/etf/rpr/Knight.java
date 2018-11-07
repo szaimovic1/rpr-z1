@@ -38,4 +38,9 @@ public class Knight extends  ChessPiece{
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
+
+    @Override
+    public boolean equals(Knight figura){
+        return (boja==figura.boja);
+    }
 }

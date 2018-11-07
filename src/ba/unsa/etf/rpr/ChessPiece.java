@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr;
 
 public abstract class ChessPiece {
+    ChessPiece() {}
+
     boolean nepostojecaPozicija(String position){                                       //default package private????
         if(position.length()<=1) return true;
         if(position.charAt(0) < 'A' || (position.charAt(0)  > 'H' && position.charAt(0) < 'a')
@@ -10,6 +12,8 @@ public abstract class ChessPiece {
             return true;
         return false;
     }
+
+    abstract boolean equals(ChessPiece f);
 
    // ChessPiece() throws IllegalChessMoveException {};                                //treba li??
 
@@ -26,6 +30,6 @@ public abstract class ChessPiece {
         }*/                                                                           //sta sa upozorenjima???!!!!!!
     }
     public abstract String getPosition();
-    public abstract Color getColour();
+    public abstract Color getColor();
     public abstract void move(String position) throws IllegalChessMoveException;
 }

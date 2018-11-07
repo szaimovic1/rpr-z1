@@ -44,4 +44,9 @@ public class Pawn extends ChessPiece{
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
+
+    @Override
+    public boolean equals(Pawn figura){
+        return (boja==figura.boja);
+    }
 }

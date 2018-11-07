@@ -37,4 +37,9 @@ public class Queen extends ChessPiece {
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
+
+    @Override
+    public boolean equals(Queen figura){
+        return (boja==figura.boja);
+    }
 }

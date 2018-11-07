@@ -36,4 +36,9 @@ public class Rook extends ChessPiece {
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
+
+    @Override
+    public boolean equals(Rook figura){
+        return (boja==figura.boja);
+    }
 }
