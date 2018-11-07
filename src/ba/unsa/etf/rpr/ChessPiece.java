@@ -13,7 +13,7 @@ public abstract class ChessPiece {
         return false;
     }
 
-    abstract boolean equals(ChessPiece f);
+    //public abstract boolean equals(ChessPiece f);
 
    // ChessPiece() throws IllegalChessMoveException {};                                //treba li??
 
