@@ -50,7 +50,7 @@ public class Queen extends ChessPiece {
         char i;
         if (pozicija.charAt(0) == s.charAt(0))
             for (i = (char)(pozicija.charAt(1) + 1); i < s.charAt(1); i++)
-                if (praznaPozicija (pozicija.charAt(0)) + Character.toString(i))
+               // if (praznaPozicija (pozicija.charAt(0)) + Character.toString(i))
         return false;
         //if()
         return true;
