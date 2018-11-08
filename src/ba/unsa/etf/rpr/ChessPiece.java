@@ -34,4 +34,5 @@ public abstract class ChessPiece {
     public abstract Color getColor();
     public abstract void move(String position) throws IllegalChessMoveException;
     public abstract boolean provjeriPutanju(String s);
+    public abstract boolean nedozvoljenaPozicija(String pozicija);
 }

@@ -4,7 +4,8 @@ public class Pawn extends ChessPiece{
     private Color boja;
     private String pozicija;
 
-    private boolean nedozvoljenaPozicija(String pozicija){
+    @Override
+    public boolean nedozvoljenaPozicija(String pozicija){
         if((this.pozicija.charAt(1)=='2' && boja==Color.WHITE) &&
                 (this.pozicija.charAt(1)+1==pozicija.charAt(1) ||
                  this.pozicija.charAt(1)+2==pozicija.charAt(1)))

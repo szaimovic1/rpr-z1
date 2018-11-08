@@ -4,7 +4,8 @@ public class Queen extends ChessPiece {
     private Color boja;
     private String pozicija;
 
-    private boolean nedozvoljenaPozicija(String pozicija){
+    @Override
+    public boolean nedozvoljenaPozicija(String pozicija){
         if(this.pozicija.charAt(0)==pozicija.charAt(0)
                 || this.pozicija.charAt(1)==pozicija.charAt(1)
           || (this.pozicija.charAt(1)+(this.pozicija.charAt(0)-pozicija.charAt(0))==pozicija.charAt(1)))

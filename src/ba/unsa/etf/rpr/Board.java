@@ -56,23 +56,24 @@ public class Board {
                 if(color==x.getValue().getColor())
                     if(x.getValue().getClass()==type)
                         if(x.getValue().provjeriPutanju(position.toUpperCase())){
-                            if(sahovskaPloca.get(position.toLowerCase()) != null){
-                                sahovskaPloca.remove(position.toLowerCase());
-                                if(color == ChessPiece.Color.WHITE)
-                                    if(color== ChessPiece.Color.WHITE)
+                            if(!x.getValue().nedozvoljenaPozicija(position) || !x.getValue().nepostojecaPozicija(position)){
+                                if(sahovskaPloca.get(position.toLowerCase()) != null){
+                                    sahovskaPloca.remove(position.toLowerCase());
+                                    if(color == ChessPiece.Color.WHITE)
                                         if(brojCrnih--==0)
                                             crniUIgri=false;
-                                else
-                                    if(brojBijelih--==0)
-                                        bijeliUIgri=false;
+                                        else
+                                            if(brojBijelih--==0)
+                                                bijeliUIgri=false;
+                                }
+                                x.getValue().move(position);
+                                sahovskaPloca.replace(position.toLowerCase(), x.getValue());
+                                sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
+                                if(color == ChessPiece.Color.WHITE)                                               //PROMIJENITI KEY POLJE I ZAKOMPLIKOVATI SEBI ZIVOT...
+                                    brojBijelih++;                                                                //Moguć potez za figuru!!!!!
+                                else brojCrnih++;                                                                 //Samo uhvatiti izuzetak iz move, glat..
+                                return;
                             }
-                            x.getValue().move(position);
-                            sahovskaPloca.replace(position.toLowerCase(), x.getValue());
-                            sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
-                            if(color == ChessPiece.Color.WHITE)
-                                brojBijelih++;
-                            else brojCrnih++;
-                            return;
                         }
             throw new IllegalChessMoveException("Nemoguć potez!\n");
         }

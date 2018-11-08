@@ -4,7 +4,8 @@ public class Bishop extends ChessPiece{
     private ChessPiece.Color boja;
     private String pozicija;
 
-    private boolean nedozvoljenaPozicija(String pozicija){
+    @Override
+    public boolean nedozvoljenaPozicija(String pozicija){
         if(this.pozicija.charAt(1)+(this.pozicija.charAt(0)-pozicija.charAt(0))==pozicija.charAt(1))
             return false;
         return true;                                                                 //da li je ovim regulisan i - ?????
