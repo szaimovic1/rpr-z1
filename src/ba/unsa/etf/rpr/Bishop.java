@@ -18,7 +18,7 @@ public class Bishop extends ChessPiece{
     }
 
     @Override
-    public ChessPiece.Color getColour() {
+    public ChessPiece.Color getColor() {
         return boja;
     }
 
@@ -37,7 +37,13 @@ public class Bishop extends ChessPiece{
     }
 
     @Override
-    public boolean equals(Bishop figura){
-        return (boja==figura.boja);
+    public boolean equals(Object o){
+        Bishop figura = (Bishop) o;
+        return (boja==figura.getColor());
+    }
+
+    @Override
+    public boolean provjeriPutanju(String s){
+        return true;
     }
 }

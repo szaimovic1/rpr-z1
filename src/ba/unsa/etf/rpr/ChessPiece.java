@@ -13,9 +13,10 @@ public abstract class ChessPiece {
         return false;
     }
 
-    //public abstract boolean equals(ChessPiece f);
+    @Override
+    public abstract boolean equals(Object o);
 
-   // ChessPiece() throws IllegalChessMoveException {};                                //treba li??
+   //ChessPiece() throws IllegalChessMoveException {};                                //treba li??
 
     public static  enum Color{
         BLACK, WHITE
@@ -32,4 +33,5 @@ public abstract class ChessPiece {
     public abstract String getPosition();
     public abstract Color getColor();
     public abstract void move(String position) throws IllegalChessMoveException;
+    public abstract boolean provjeriPutanju(String s);
 }

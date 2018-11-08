@@ -19,7 +19,7 @@ public class Rook extends ChessPiece {
     }
 
     @Override
-    public Color getColour() {
+    public Color getColor() {
         return boja;
     }
 
@@ -38,7 +38,13 @@ public class Rook extends ChessPiece {
     }
 
     @Override
-    public boolean equals(Rook figura){
-        return (boja==figura.boja);
+    public boolean equals(Object o){
+        Rook figura = (Rook)o;
+        return (boja==figura.getColor());
+    }
+
+    @Override
+    public boolean provjeriPutanju(String s){
+        return true;
     }
 }

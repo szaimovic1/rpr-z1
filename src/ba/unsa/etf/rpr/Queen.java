@@ -20,7 +20,7 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public Color getColour() {
+    public Color getColor() {
         return boja;
     }
 
@@ -39,7 +39,13 @@ public class Queen extends ChessPiece {
     }
 
     @Override
-    public boolean equals(Queen figura){
-        return (boja==figura.boja);
+    public boolean equals(Object o){
+        Queen figura = (Queen)o;
+        return (boja==figura.getColor());
+    }
+
+    @Override
+    public boolean provjeriPutanju(String s){
+        return true;
     }
 }

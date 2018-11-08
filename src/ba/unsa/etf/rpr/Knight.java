@@ -21,7 +21,7 @@ public class Knight extends  ChessPiece{
     }
 
     @Override
-    public ChessPiece.Color getColour() {
+    public ChessPiece.Color getColor() {
         return boja;
     }
 
@@ -40,7 +40,13 @@ public class Knight extends  ChessPiece{
     }
 
     @Override
-    public boolean equals(Knight figura){
-        return (boja==figura.boja);
+    public boolean equals(Object o){
+        Knight figura = (Knight) o;
+        return (boja==figura.getColor());
+    }
+
+    @Override
+    public boolean provjeriPutanju(String s){
+        return true;
     }
 }

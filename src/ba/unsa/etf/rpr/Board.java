@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Board {
     private boolean bijeliUIgri, crniUIgri;
@@ -47,16 +48,39 @@ public class Board {
         crniUIgri=true;
     }
 
-    void move(Class type, ChessPiece.Color color, String position){
-        String pozicija = new String();
-        for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
-            if(x.getValue().equals(new type("", color)))
-                pozicija=x.getKey();
-
+    public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException{
+        if (sahovskaPloca.get(position.toLowerCase()) != null && sahovskaPloca.get(position.toLowerCase()).getColor()==color)
+            throw new IllegalChessMoveException("Figura iste boje!\n");
+        else{
+            for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
+                if(color==x.getValue().getColor())
+                    if(x.getValue().getClass()==type)
+                        if(x.getValue().provjeriPutanju(position.toUpperCase())){
+                            if(sahovskaPloca.get(position.toLowerCase()) != null){
+                                sahovskaPloca.remove(position.toLowerCase());
+                                if(color == ChessPiece.Color.WHITE)
+                                    if(brojCrnih--==0)
+                                        crniUIgri=false;
+                                else
+                                    if(brojBijelih--==0)
+                                        bijeliUIgri=false;
+                            }
+                            x.getValue().move(position);
+                            sahovskaPloca.put(position.toLowerCase(), x.getValue());
+                            sahovskaPloca.remove(x.getKey());
+                            if(color == ChessPiece.Color.WHITE)
+                                brojBijelih++;
+                            else brojCrnih++;
+                            return;
+                        }
+            throw new IllegalChessMoveException("Nemoguć potez!\n");
+        }
     }
 
-    void move(String oldPosition, String newPosition){
-
+    public void move(String oldPosition, String newPosition) throws IllegalChessMoveException {
+        if(sahovskaPloca.get(oldPosition) == null)
+            throw new IllegalArgumentException("Nema figure!\n");
+        move(sahovskaPloca.get(oldPosition).getClass(), sahovskaPloca.get(oldPosition).getColor(), newPosition);
     }
 
     boolean isCheck(ChessPiece.Color color){
