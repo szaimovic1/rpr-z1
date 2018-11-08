@@ -59,15 +59,16 @@ public class Board {
                             if(sahovskaPloca.get(position.toLowerCase()) != null){
                                 sahovskaPloca.remove(position.toLowerCase());
                                 if(color == ChessPiece.Color.WHITE)
-                                    if(brojCrnih--==0)
-                                        crniUIgri=false;
+                                    if(color== ChessPiece.Color.WHITE)
+                                        if(brojCrnih--==0)
+                                            crniUIgri=false;
                                 else
                                     if(brojBijelih--==0)
                                         bijeliUIgri=false;
                             }
                             x.getValue().move(position);
-                            sahovskaPloca.put(position.toLowerCase(), x.getValue());
-                            sahovskaPloca.remove(x.getKey());
+                            sahovskaPloca.replace(position.toLowerCase(), x.getValue());
+                            sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
                             if(color == ChessPiece.Color.WHITE)
                                 brojBijelih++;
                             else brojCrnih++;
@@ -84,9 +85,7 @@ public class Board {
     }
 
     boolean isCheck(ChessPiece.Color color){
-        if(color==ChessPiece.Color.WHITE)
-            return bijeliUIgri;
-        return crniUIgri;
+        return true;
     }
 
 }
