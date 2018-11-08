@@ -39,7 +39,7 @@ public class King extends ChessPiece {
     public void move(String position) throws IllegalChessMoveException{
         if(nepostojecaPozicija(position))
             throw new IllegalArgumentException("Nepostojeća pozicija!\n");
-        if(nedozvoljenaPozicija(position))
+        if(this.nedozvoljenaPozicija(position))
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
@@ -52,6 +52,12 @@ public class King extends ChessPiece {
 
     @Override
     public boolean provjeriPutanju(String s){
+        return true;
+    }
+
+    public boolean provjeriSah(){
+        //pozivati sve provjeri putanju za sve figure..
+
         return true;
     }
 }

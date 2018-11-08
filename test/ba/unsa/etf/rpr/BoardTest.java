@@ -14,7 +14,7 @@ class BoardTest {
         assertDoesNotThrow(
                 () -> {
                     b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
-                    b.move(Pawn.class, ChessPiece.Color.WHITE, "A6");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "A4");            //ne moze A6!!!
                     b.move(Knight.class, ChessPiece.Color.WHITE, "C3");
                     b.move(King.class, ChessPiece.Color.WHITE, "E2");
                     b.move(King.class, ChessPiece.Color.WHITE, "E3");
@@ -28,11 +28,11 @@ class BoardTest {
         Board b = new Board();
         assertDoesNotThrow(
             () -> {
-                b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
-                b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
-                b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
-                b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
-                b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "E4");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "E5");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "E6");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "D7");
+                    b.move(Pawn.class, ChessPiece.Color.WHITE, "C8");
             }
         );
     }
@@ -126,7 +126,7 @@ class BoardTest {
                 ),
                 () -> assertThrows(
                         IllegalChessMoveException.class,
-                        () -> b.move(Pawn.class, ChessPiece.Color.BLACK, "H6")
+                        () -> b.move(Bishop.class, ChessPiece.Color.BLACK, "H6")
                 ),
                 () -> assertThrows(
                         IllegalChessMoveException.class,
@@ -218,7 +218,7 @@ class BoardTest {
             b.move("D7", "C8");
             b.move("D1", "E2");
         } catch(Exception e) {
-            // Do nothing
+            //System.out.println(e);
         }
         b.isCheck(ChessPiece.Color.BLACK);
         assertDoesNotThrow(

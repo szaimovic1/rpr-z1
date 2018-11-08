@@ -53,40 +53,66 @@ public class Board {
             throw new IllegalChessMoveException("Figura iste boje!\n");
         else{
             for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
-                if(color==x.getValue().getColor())
-                    if(x.getValue().getClass()==type)
-                        if(x.getValue().provjeriPutanju(position.toUpperCase())){
-                            if(!x.getValue().nedozvoljenaPozicija(position) || !x.getValue().nepostojecaPozicija(position)){
-                                if(sahovskaPloca.get(position.toLowerCase()) != null){
-                                    sahovskaPloca.remove(position.toLowerCase());
-                                    if(color == ChessPiece.Color.WHITE)
+                if(color==x.getValue().getColor() && x.getValue().getClass().equals(type)
+                   && x.getValue().provjeriPutanju(position.toUpperCase())){
+                    if(type==Pawn.class){
+                        Pawn pjesak = new Pawn (x.getKey().toUpperCase(), x.getValue().getColor());
+                        if(pjesak.kosoKupljenje(position)){
+                            if(sahovskaPloca.get(position.toLowerCase()) != null)
+                                sahovskaPloca.remove(position.toLowerCase());
+                            x.getValue().move(position.toUpperCase());
+                            sahovskaPloca.put(position.toLowerCase(), x.getValue());
+                            sahovskaPloca.remove(x.getKey());
+                            return;
+                        }
+                        else if(!x.getValue().nedozvoljenaPozicija(position)
+                                && !x.getValue().nepostojecaPozicija(position)){
+                            x.getValue().move(position.toUpperCase());
+                            sahovskaPloca.put(position.toLowerCase(), x.getValue());
+                            sahovskaPloca.remove(x.getKey());
+                            return;
+                        }
+                    }
+                    else if(!x.getValue().nedozvoljenaPozicija(position)
+                            && !x.getValue().nepostojecaPozicija(position)){
+                        if(sahovskaPloca.get(position.toLowerCase()) != null){
+                            sahovskaPloca.remove(position.toLowerCase());
+                                    /*if(color == ChessPiece.Color.WHITE)
                                         if(brojCrnih--==0)
                                             crniUIgri=false;
                                         else
                                             if(brojBijelih--==0)
-                                                bijeliUIgri=false;
-                                }
-                                x.getValue().move(position);
-                                sahovskaPloca.replace(position.toLowerCase(), x.getValue());
-                                sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
-                                if(color == ChessPiece.Color.WHITE)                                               //PROMIJENITI KEY POLJE I ZAKOMPLIKOVATI SEBI ZIVOT...
-                                    brojBijelih++;                                                                //Moguć potez za figuru!!!!!
-                                else brojCrnih++;                                                                 //Samo uhvatiti izuzetak iz move, glat..
-                                return;
-                            }
+                                                bijeliUIgri=false;*/
                         }
+                        x.getValue().move(position.toUpperCase());
+                        sahovskaPloca.put(position.toLowerCase(), x.getValue());
+                        sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
+                                /*if(color == ChessPiece.Color.WHITE)                                               //PROMIJENITI KEY POLJE I ZAKOMPLIKOVATI SEBI ZIVOT...
+                                    brojBijelih++;                                                                //Moguć potez za figuru!!!!!
+                                else brojCrnih++;*/                                                                 //Samo uhvatiti izuzetak iz move, glat..
+                        return;
+                    }
+                }
             throw new IllegalChessMoveException("Nemoguć potez!\n");
         }
     }
 
     public void move(String oldPosition, String newPosition) throws IllegalChessMoveException {
-        if(sahovskaPloca.get(oldPosition) == null)
+        if(sahovskaPloca.get(oldPosition.toLowerCase()) == null)
             throw new IllegalArgumentException("Nema figure!\n");
-        move(sahovskaPloca.get(oldPosition).getClass(), sahovskaPloca.get(oldPosition).getColor(), newPosition);
+        move(sahovskaPloca.get(oldPosition.toLowerCase()).getClass(), sahovskaPloca.get(oldPosition.toLowerCase()).getColor(), newPosition.toUpperCase());
     }
 
     boolean isCheck(ChessPiece.Color color){
+        for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
+        if(King.class==x.getValue().getClass() && x.getValue().getColor()==color){
+            King k = new King(x.getKey().toUpperCase(), color);
+            return k.provjeriSah();
+        }
         return true;
     }
 
+    public boolean praznaPozicija(String pozicija){
+        return (sahovskaPloca.get(pozicija.toLowerCase()) == null);
+    }
 }

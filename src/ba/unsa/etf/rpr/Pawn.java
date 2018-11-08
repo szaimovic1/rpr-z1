@@ -6,18 +6,25 @@ public class Pawn extends ChessPiece{
 
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
+        if(this.pozicija.charAt(0)!=pozicija.charAt(0))
+            return true;
         if((this.pozicija.charAt(1)=='2' && boja==Color.WHITE) &&
-                (this.pozicija.charAt(1)+1==pozicija.charAt(1) ||
-                 this.pozicija.charAt(1)+2==pozicija.charAt(1)))
+                 this.pozicija.charAt(1)+2==pozicija.charAt(1))
             return false;
         if((this.pozicija.charAt(1)=='7' && boja==Color.BLACK) &&
-                (this.pozicija.charAt(1)-1==pozicija.charAt(1) ||
-                 this.pozicija.charAt(1)-2==pozicija.charAt(1)))
+                 this.pozicija.charAt(1)-2==pozicija.charAt(1))
             return false;
         if((this.pozicija.charAt(1)+1==pozicija.charAt(1) && boja==Color.WHITE)
            || (this.pozicija.charAt(1)-1==pozicija.charAt(1) && boja==Color.BLACK))
             return false;
         return true;                                                          //zanemarena mogucnost vracanja figure!!!!
+    }
+
+    public boolean kosoKupljenje(String pozicija){
+        if((this.pozicija.charAt(0)+1==pozicija.charAt(0) || (this.pozicija.charAt(0)-1==pozicija.charAt(0))) &&
+                this.pozicija.charAt(1)+1==pozicija.charAt(1))
+            return true;
+        return false;
     }
 
     Pawn(String pozicija, Color boja){
@@ -41,7 +48,7 @@ public class Pawn extends ChessPiece{
     public void move(String position) throws IllegalChessMoveException{
         if(nepostojecaPozicija(position))
             throw new IllegalArgumentException("Nepostojeća pozicija!\n");
-        if(nedozvoljenaPozicija(position))
+        if(this.nedozvoljenaPozicija(position) && !this.kosoKupljenje(position))
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
