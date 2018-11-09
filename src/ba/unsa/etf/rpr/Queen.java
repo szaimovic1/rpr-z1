@@ -7,11 +7,35 @@ public class Queen extends ChessPiece {
 
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
-        if(this.pozicija.charAt(0)==pozicija.charAt(0)
-                || this.pozicija.charAt(1)==pozicija.charAt(1)
-          || (this.pozicija.charAt(1)+(this.pozicija.charAt(0)-pozicija.charAt(0))==pozicija.charAt(1)))
-            return false;                                                             //valja to skontat...
-        return true;                                                                 //da li je ovim regulisan i - ?????
+        String i = this.pozicija;
+        int k=0, j;
+        if(this.pozicija.charAt(0)<pozicija.charAt(0))
+            k=1;
+        else if(this.pozicija.charAt(0)>pozicija.charAt(0))
+            k=-1;
+        if(this.pozicija.charAt(1)<pozicija.charAt(1))
+            j=1;
+        else j=-1;
+        if(this.pozicija.charAt(0)+k==pozicija.charAt(0) && this.pozicija.charAt(1)+j==pozicija.charAt(1))
+            return false;
+        int a = i.charAt(0), b = i.charAt(1);
+        a+=k;
+        b+=j;
+        i = new String(Character.toChars(a));
+        i += new String(Character.toChars(b));
+        int brojac=1;
+        while (!i.equals(pozicija)) {
+            if(brojac>8)
+                return true;
+            a = i.charAt(0);
+            a+=k;
+            b = i.charAt(1);
+            b+=j;
+            i = new String(Character.toChars(a));
+            i += new String(Character.toChars(b));
+            brojac++;
+        }
+        return false;
     }
 
     Queen(String pozicija, Color boja){

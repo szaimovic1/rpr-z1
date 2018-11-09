@@ -98,37 +98,7 @@ public class Board {
     public boolean provjeriPutanju(ChessPiece figura, String s) {
         if(figura.getClass()==King.class || figura.getClass()==Knight.class)
             return true;
-        if(figura.getPosition().charAt(0)==s.charAt(0) && figura.getPosition().charAt(1)<s.charAt(1))
-            for(char i = figura.getPosition().charAt(1); i<s.charAt(1); i++){
-                if(i==figura.getPosition().charAt(1)){}
-                else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i))){
-                    return false;
-                }
-            }
-        else if(figura.getPosition().charAt(1)==s.charAt(1) && figura.getPosition().charAt(0)<s.charAt(0))
-            for(char i = figura.getPosition().charAt(0); i<s.charAt(0); i++){
-                if(i==figura.getPosition().charAt(0)){}
-                else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
-                    return false;
-            }
-        else if(figura.getPosition().charAt(0)==s.charAt(0) && figura.getPosition().charAt(1)>s.charAt(1))
-            for(char i = figura.getPosition().charAt(1); i>s.charAt(1); i--){
-                if(i==figura.getPosition().charAt(1)){}
-                else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i))){
-                    return false;
-                }
-            }
-        else if(figura.getPosition().charAt(1)==s.charAt(1) && figura.getPosition().charAt(0)>s.charAt(0))
-            for(char i = figura.getPosition().charAt(0); i>s.charAt(0); i--){
-                if(i==figura.getPosition().charAt(0)){}
-                else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
-                    return false;
-            }
-        else {
             String i = figura.getPosition();
-
-            System.out.println("Od: " + i);
-
             int k=0, j;
             if(figura.getPosition().charAt(0)<s.charAt(0))
                 k=1;
@@ -137,14 +107,13 @@ public class Board {
             if(figura.getPosition().charAt(1)<s.charAt(1))
                 j=1;
             else j=-1;
+            if(figura.getPosition().charAt(0)+k==s.charAt(0) && figura.getPosition().charAt(1)+j==s.charAt(1))
+                return true;
             int a = i.charAt(0), b = i.charAt(1);
             a+=k;
             b+=j;
             i = new String(Character.toChars(a));
             i += new String(Character.toChars(b));
-
-            System.out.println("Do: " + i);
-
             while (!i.equals(s)) {
                 if (!praznaPozicija(i))
                     return false;
@@ -154,11 +123,7 @@ public class Board {
                 b+=j;
                 i = new String(Character.toChars(a));
                 i += new String(Character.toChars(b));
-
-                System.out.println("Do: " + i);
-
             }
-        }
         return true;
     }
 
@@ -173,7 +138,7 @@ public class Board {
                 s=x.getValue().getPosition();
         for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
             if(x.getValue().getColor()!=color){
-               if(!x.getValue().nedozvoljenaPozicija(s) && provjeriPutanju(x.getValue(), s))
+               if(!x.getValue().nedozvoljenaPozicija(s) && provjeriPutanju(x.getValue(), s))               //metode koje u move bacaju izuzetke!!!!
                 return true;
             }
         return false;

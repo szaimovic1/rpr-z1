@@ -6,9 +6,17 @@ public class King extends ChessPiece {
 
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
-        if(this.pozicija.charAt(0)+1==pozicija.charAt(0) || this.pozicija.charAt(0)-1==pozicija.charAt(0)
-               || this.pozicija.charAt(1)+1==pozicija.charAt(1) || this.pozicija.charAt(1)-1==pozicija.charAt(1))
-            return false;                                                                 //nesto pametnije?
+        int k=0, j;
+        if(this.pozicija.charAt(0)<pozicija.charAt(0))
+            k=1;
+        else if(this.pozicija.charAt(0)>pozicija.charAt(0))
+            k=-1;
+        if(this.pozicija.charAt(1)<pozicija.charAt(1))
+            j=1;
+        else j=-1;
+
+        if(this.pozicija.charAt(0)+k==pozicija.charAt(0) && this.pozicija.charAt(1)+j==pozicija.charAt(1))
+            return false;
         return true;
     }
 
