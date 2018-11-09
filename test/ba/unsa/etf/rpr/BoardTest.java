@@ -266,4 +266,37 @@ class BoardTest {
                 }
         );
     }
+
+    @Test
+    void kupljenjeSvojeFigure() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalChessMoveException.class,
+                        () -> b.move("A1", "A2")
+                )
+        );
+    }
+
+    @Test
+    void pomjeriIPojedi() {
+        Board b = new Board();
+        try{
+            b.move("E2", "E4");
+            b.move("F1", "C4");
+            b.move("C4", "F7");
+        }
+        catch(Exception e) {}
+    }
+
+    @Test
+    void praznaPozicija() {
+        Board b = new Board();
+        assertAll(
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> b.move("C4", "A5")
+                )
+        );
+    }
 }

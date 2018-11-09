@@ -12,9 +12,6 @@ public abstract class ChessPiece {
             return true;
         return false;
     }
-//Za izvedene klase je implementirana na specifičan način...
-    @Override
-    public abstract boolean equals(Object o);
     public enum Color{
         BLACK, WHITE
     }

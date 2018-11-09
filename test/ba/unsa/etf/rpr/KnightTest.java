@@ -14,4 +14,35 @@ class KnightTest {
         );
 
     }
+
+    @Test
+    void testiranjeKonja() {
+        try {
+            Knight b = new Knight("I9", ChessPiece.Color.WHITE);
+        } catch(Exception e) {
+            // Do nothing
+        }
+        try{
+            Knight b1 = new Knight("E2", ChessPiece.Color.WHITE);
+            b1.move("H3");
+        }
+        catch (Exception e) {
+            // Do nothing
+        }
+        try{
+            Knight b1 = new Knight("E2", ChessPiece.Color.WHITE);
+            b1.move("I9");
+        }
+        catch (Exception e) {
+            // Do nothing
+        }
+        try{
+            Knight b1 = new Knight("E2", ChessPiece.Color.WHITE);
+            b1.move("F4");
+            System.out.println(b1.getPosition());
+        }
+        catch (Exception e) {
+            // Do nothing
+        }
+    }
 }

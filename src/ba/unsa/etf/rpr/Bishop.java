@@ -62,10 +62,4 @@ public class Bishop extends ChessPiece{
             throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");
         pozicija=position;
     }
-
-    @Override
-    public boolean equals(Object o){
-        Bishop figura = (Bishop) o;
-        return (boja==figura.getColor());
-    }
 }
