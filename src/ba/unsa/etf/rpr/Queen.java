@@ -1,4 +1,5 @@
 package ba.unsa.etf.rpr;
+import ba.unsa.etf.rpr.Board;
 
 public class Queen extends ChessPiece {
     private Color boja;
@@ -45,14 +46,14 @@ public class Queen extends ChessPiece {
         return (boja==figura.getColor());
     }
 
-    @Override
+    /*@Override
     public boolean provjeriPutanju(String s) {
         char i;
         if (pozicija.charAt(0) == s.charAt(0))
             for (i = (char)(pozicija.charAt(1) + 1); i < s.charAt(1); i++)
-               // if (praznaPozicija (pozicija.charAt(0)) + Character.toString(i))
+                if (Board::praznaPozicija(pozicija.charAt(0)+Character.toString(i)))
         return false;
         //if()
         return true;
-    }
+    }*/
 }

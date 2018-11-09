@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 import java.util.HashMap;
-import java.util.Map.Entry;
+import ba.unsa.etf.rpr.Queen;
 
 public class Board {
     private boolean bijeliUIgri, crniUIgri;
@@ -53,8 +53,7 @@ public class Board {
             throw new IllegalChessMoveException("Figura iste boje!\n");
         else{
             for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
-                if(color==x.getValue().getColor() && x.getValue().getClass().equals(type)
-                   && x.getValue().provjeriPutanju(position.toUpperCase())){
+                if(color==x.getValue().getColor() && x.getValue().getClass().equals(type)){
                     if(type==Pawn.class){
                         Pawn pjesak = new Pawn (x.getKey().toUpperCase(), x.getValue().getColor());
                         if(pjesak.kosoKupljenje(position)){
@@ -109,6 +108,30 @@ public class Board {
             King k = new King(x.getKey().toUpperCase(), color);
             return k.provjeriSah();
         }
+        return true;
+    }
+
+    public boolean provjeriPutanju(ChessPiece figura, String s) {
+            if(figura.getPosition().charAt(0)==s.charAt(0))
+                for(char i = figura.getPosition().charAt(1); i<s.charAt(1); i++){
+                    if(i==figura.getPosition().charAt(1)){}
+                    else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i)))
+                        return false;
+                }
+            else if(figura.getPosition().charAt(1)==s.charAt(1))
+                for(char i = figura.getPosition().charAt(0); i<s.charAt(0); i++){
+                    if(i==figura.getPosition().charAt(0)){}
+                    else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
+                        return false;
+                }
+             else{
+                for(String i = new String (figura.getPosition()); !i.equals(s) ;
+                   i = Character.toString(i.charAt(0))+ "1" + Character.toString(i.charAt(1))+ "1"){
+                    if(i.equals(figura.getPosition())){}
+                    else if(!praznaPozicija(i))
+                    return false;
+                }
+            }
         return true;
     }
 

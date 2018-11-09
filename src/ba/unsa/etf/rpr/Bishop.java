@@ -43,8 +43,8 @@ public class Bishop extends ChessPiece{
         return (boja==figura.getColor());
     }
 
-    @Override
+    /*@Override
     public boolean provjeriPutanju(String s){
         return true;
-    }
+    }*/
 }
