@@ -77,6 +77,9 @@ public class Board {
                         if(sahovskaPloca.get(position.toLowerCase()) != null)
                             sahovskaPloca.remove(position.toLowerCase());
                         x.getValue().move(position.toUpperCase());
+
+                        System.out.println(x.getValue().getPosition());
+
                         sahovskaPloca.put(position.toLowerCase(), x.getValue());
                         sahovskaPloca.remove(x.getKey());
                         return;
@@ -90,15 +93,6 @@ public class Board {
         if(sahovskaPloca.get(oldPosition.toLowerCase()) == null)
             throw new IllegalArgumentException("Nema figure!\n");
         move(sahovskaPloca.get(oldPosition.toLowerCase()).getClass(), sahovskaPloca.get(oldPosition.toLowerCase()).getColor(), newPosition.toUpperCase());
-    }
-
-    boolean isCheck(ChessPiece.Color color){
-        for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
-        if(King.class==x.getValue().getClass() && x.getValue().getColor()==color){
-            King k = new King(x.getKey().toUpperCase(), color);
-            return k.provjeriSah();
-        }
-        return true;
     }
 
     public boolean provjeriPutanju(ChessPiece figura, String s) {
@@ -132,12 +126,15 @@ public class Board {
             }
         else {
             String i = figura.getPosition();
-            int k=-1, j;
-            if(figura.getPosition().charAt(1)>s.charAt(1))
+
+            System.out.println("Od: " + i);
+
+            int k=0, j;
+            if(figura.getPosition().charAt(0)<s.charAt(0))
                 k=1;
-            else if(figura.getPosition().charAt(1)>s.charAt(1))
+            else if(figura.getPosition().charAt(0)>s.charAt(0))
                 k=-1;
-            if(figura.getPosition().charAt(0)>s.charAt(0))
+            if(figura.getPosition().charAt(1)<s.charAt(1))
                 j=1;
             else j=-1;
             int a = i.charAt(0), b = i.charAt(1);
@@ -145,6 +142,9 @@ public class Board {
             b+=j;
             i = new String(Character.toChars(a));
             i += new String(Character.toChars(b));
+
+            System.out.println("Do: " + i);
+
             while (!i.equals(s)) {
                 if (!praznaPozicija(i))
                     return false;
@@ -154,6 +154,9 @@ public class Board {
                 b+=j;
                 i = new String(Character.toChars(a));
                 i += new String(Character.toChars(b));
+
+                System.out.println("Do: " + i);
+
             }
         }
         return true;
@@ -161,5 +164,18 @@ public class Board {
 
     public boolean praznaPozicija(String pozicija){
         return (sahovskaPloca.get(pozicija.toLowerCase()) == null);
+    }
+
+    boolean isCheck(ChessPiece.Color color){
+        String s = new String();
+        for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
+            if(King.class==x.getValue().getClass() && x.getValue().getColor()==color)
+                s=x.getValue().getPosition();
+        for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
+            if(x.getValue().getColor()!=color){
+               if(!x.getValue().nedozvoljenaPozicija(s) && provjeriPutanju(x.getValue(), s))
+                return true;
+            }
+        return false;
     }
 }

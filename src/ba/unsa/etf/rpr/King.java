@@ -6,10 +6,8 @@ public class King extends ChessPiece {
 
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
-        if(this.pozicija.charAt(0)+1==pozicija.charAt(0)
-               || this.pozicija.charAt(0)-1==pozicija.charAt(0)
-               || this.pozicija.charAt(1)+1==pozicija.charAt(1)
-               || this.pozicija.charAt(1)-1==pozicija.charAt(1))
+        if(this.pozicija.charAt(0)+1==pozicija.charAt(0) || this.pozicija.charAt(0)-1==pozicija.charAt(0)
+               || this.pozicija.charAt(1)+1==pozicija.charAt(1) || this.pozicija.charAt(1)-1==pozicija.charAt(1))
             return false;                                                                 //nesto pametnije?
         return true;
     }
