@@ -4,6 +4,7 @@ public class Pawn extends ChessPiece {
     private Color boja;
     private String pozicija;
 
+//Kako nalažu pravila programa, zanemarena je mogućnost vraćanja pješaka.
     @Override
     public boolean nedozvoljenaPozicija(String pozicija) {
         if (this.pozicija.charAt(0) != pozicija.charAt(0))
@@ -17,9 +18,10 @@ public class Pawn extends ChessPiece {
         if ((this.pozicija.charAt(1) + 1 == pozicija.charAt(1) && boja == Color.WHITE)
                 || (this.pozicija.charAt(1) - 1 == pozicija.charAt(1) && boja == Color.BLACK))
             return false;
-        return true;                                                          //zanemarena mogucnost vracanja figure!!!!
+        return true;
     }
 
+//Specijalan slučaj dozvoljenje pozicije za pješaka!
     public boolean kosoKupljenje(String pozicija) {
         if ((this.pozicija.charAt(0) + 1 == pozicija.charAt(0) || (this.pozicija.charAt(0) - 1 == pozicija.charAt(0))) &&
                 this.pozicija.charAt(1) + 1 == pozicija.charAt(1))

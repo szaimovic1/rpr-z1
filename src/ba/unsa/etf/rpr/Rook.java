@@ -7,8 +7,8 @@ public class Rook extends ChessPiece {
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
         if(this.pozicija.charAt(0)==pozicija.charAt(0)
-                || this.pozicija.charAt(1)==pozicija.charAt(1))                                //dobro svariti zasto ==
-            return false;                                                                      //a ne !=     !!!!!
+                || this.pozicija.charAt(1)==pozicija.charAt(1))
+            return false;
         return true;
     }
 

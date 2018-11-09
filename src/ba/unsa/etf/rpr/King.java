@@ -6,7 +6,7 @@ public class King extends ChessPiece {
 
     @Override
     public boolean nedozvoljenaPozicija(String pozicija){
-        int k=0, j;
+        int k=0, j=0;
         if(this.pozicija.charAt(0)<pozicija.charAt(0))
             k=1;
         else if(this.pozicija.charAt(0)>pozicija.charAt(0))
@@ -23,10 +23,6 @@ public class King extends ChessPiece {
     King(String pozicija, Color boja){
         if(nepostojecaPozicija(pozicija))
             throw new IllegalArgumentException("Nepostojeća pozicija!\n");
-
-        //if(nedozvoljenaPozicija(pozicija))
-            //throw new IllegalChessMoveException("Nedozvoljena pozicija!\n");            //nedozvoljeno?????
-
         this.boja=boja;
         this.pozicija=pozicija;
     }

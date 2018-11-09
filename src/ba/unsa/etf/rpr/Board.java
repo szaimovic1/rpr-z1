@@ -4,7 +4,6 @@ import java.util.HashMap;
 public class Board {
     private HashMap<String, ChessPiece> sahovskaPloca;
 
-
     Board(){
         sahovskaPloca = new HashMap<>();
         sahovskaPloca.put("e1", new King("E1", ChessPiece.Color.WHITE));
@@ -41,6 +40,7 @@ public class Board {
         sahovskaPloca.put("h7" ,new Pawn("H7", ChessPiece.Color.BLACK));
     }
 
+//Pošto je previše specijalnih slučajeva, u metodi move, ostavila sam ovakvo ponavljanje koda..
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException{
         if (sahovskaPloca.get(position.toLowerCase()) != null && sahovskaPloca.get(position.toLowerCase()).getColor()==color)
             throw new IllegalChessMoveException("Figura iste boje!\n");
@@ -85,6 +85,7 @@ public class Board {
         move(sahovskaPloca.get(oldPosition.toLowerCase()).getClass(), sahovskaPloca.get(oldPosition.toLowerCase()).getColor(), newPosition.toUpperCase());
     }
 
+//Provjera da li ima figurica koje se ne mogu preskočiti!
     public boolean provjeriPutanju(ChessPiece figura, String s) {
         if(figura.getClass()==Knight.class)
             return true;
@@ -121,6 +122,7 @@ public class Board {
         return (sahovskaPloca.get(pozicija.toLowerCase()) == null);
     }
 
+//U sklopu metode, koriste se funkcije koje u funkcijama move, ponaosob za figure, provjeravaju izuzetke!!!
     boolean isCheck(ChessPiece.Color color){
         String s = new String();
         for (HashMap.Entry<String, ChessPiece> x : sahovskaPloca.entrySet())
@@ -133,7 +135,7 @@ public class Board {
                     if(pjesak.kosoKupljenje(s))
                         return true;
                 }
-                else if(!x.getValue().nedozvoljenaPozicija(s) && provjeriPutanju(x.getValue(), s))               //metode koje u move bacaju izuzetke!!!!
+                else if(!x.getValue().nedozvoljenaPozicija(s) && provjeriPutanju(x.getValue(), s))
                     return true;
             }
         return false;
