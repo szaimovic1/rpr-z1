@@ -56,7 +56,7 @@ public class Board {
                 if(color==x.getValue().getColor() && x.getValue().getClass().equals(type)){
                     if(type==Pawn.class){
                         Pawn pjesak = new Pawn (x.getKey().toUpperCase(), x.getValue().getColor());
-                        if(pjesak.kosoKupljenje(position)){
+                        if(pjesak.kosoKupljenje(position) && provjeriPutanju(x.getValue(), position)){
                             if(sahovskaPloca.get(position.toLowerCase()) != null)
                                 sahovskaPloca.remove(position.toLowerCase());
                             x.getValue().move(position.toUpperCase());
@@ -65,7 +65,7 @@ public class Board {
                             return;
                         }
                         else if(!x.getValue().nedozvoljenaPozicija(position)
-                                && !x.getValue().nepostojecaPozicija(position)){
+                                && !x.getValue().nepostojecaPozicija(position) && provjeriPutanju(x.getValue(), position)){
                             x.getValue().move(position.toUpperCase());
                             sahovskaPloca.put(position.toLowerCase(), x.getValue());
                             sahovskaPloca.remove(x.getKey());
@@ -73,22 +73,12 @@ public class Board {
                         }
                     }
                     else if(!x.getValue().nedozvoljenaPozicija(position)
-                            && !x.getValue().nepostojecaPozicija(position)){
-                        if(sahovskaPloca.get(position.toLowerCase()) != null){
+                            && !x.getValue().nepostojecaPozicija(position) && provjeriPutanju(x.getValue(), position)){
+                        if(sahovskaPloca.get(position.toLowerCase()) != null)
                             sahovskaPloca.remove(position.toLowerCase());
-                                    /*if(color == ChessPiece.Color.WHITE)
-                                        if(brojCrnih--==0)
-                                            crniUIgri=false;
-                                        else
-                                            if(brojBijelih--==0)
-                                                bijeliUIgri=false;*/
-                        }
                         x.getValue().move(position.toUpperCase());
                         sahovskaPloca.put(position.toLowerCase(), x.getValue());
-                        sahovskaPloca.remove(x.getKey());                                                 //problem sa hash zbog poretka..
-                                /*if(color == ChessPiece.Color.WHITE)                                               //PROMIJENITI KEY POLJE I ZAKOMPLIKOVATI SEBI ZIVOT...
-                                    brojBijelih++;                                                                //Moguć potez za figuru!!!!!
-                                else brojCrnih++;*/                                                                 //Samo uhvatiti izuzetak iz move, glat..
+                        sahovskaPloca.remove(x.getKey());
                         return;
                     }
                 }
@@ -112,26 +102,60 @@ public class Board {
     }
 
     public boolean provjeriPutanju(ChessPiece figura, String s) {
-            if(figura.getPosition().charAt(0)==s.charAt(0))
-                for(char i = figura.getPosition().charAt(1); i<s.charAt(1); i++){
-                    if(i==figura.getPosition().charAt(1)){}
-                    else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i)))
-                        return false;
-                }
-            else if(figura.getPosition().charAt(1)==s.charAt(1))
-                for(char i = figura.getPosition().charAt(0); i<s.charAt(0); i++){
-                    if(i==figura.getPosition().charAt(0)){}
-                    else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
-                        return false;
-                }
-             else{
-                for(String i = new String (figura.getPosition()); !i.equals(s) ;
-                   i = Character.toString(i.charAt(0))+ "1" + Character.toString(i.charAt(1))+ "1"){
-                    if(i.equals(figura.getPosition())){}
-                    else if(!praznaPozicija(i))
+        if(figura.getClass()==King.class || figura.getClass()==Knight.class)
+            return true;
+        if(figura.getPosition().charAt(0)==s.charAt(0) && figura.getPosition().charAt(1)<s.charAt(1))
+            for(char i = figura.getPosition().charAt(1); i<s.charAt(1); i++){
+                if(i==figura.getPosition().charAt(1)){}
+                else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i))){
                     return false;
                 }
             }
+        else if(figura.getPosition().charAt(1)==s.charAt(1) && figura.getPosition().charAt(0)<s.charAt(0))
+            for(char i = figura.getPosition().charAt(0); i<s.charAt(0); i++){
+                if(i==figura.getPosition().charAt(0)){}
+                else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
+                    return false;
+            }
+        else if(figura.getPosition().charAt(0)==s.charAt(0) && figura.getPosition().charAt(1)>s.charAt(1))
+            for(char i = figura.getPosition().charAt(1); i>s.charAt(1); i--){
+                if(i==figura.getPosition().charAt(1)){}
+                else if(!praznaPozicija(Character.toString(figura.getPosition().charAt(0))+Character.toString(i))){
+                    return false;
+                }
+            }
+        else if(figura.getPosition().charAt(1)==s.charAt(1) && figura.getPosition().charAt(0)>s.charAt(0))
+            for(char i = figura.getPosition().charAt(0); i>s.charAt(0); i--){
+                if(i==figura.getPosition().charAt(0)){}
+                else if(!praznaPozicija(Character.toString(i) + Character.toString(figura.getPosition().charAt(1))))
+                    return false;
+            }
+        else {
+            String i = figura.getPosition();
+            int k=-1, j;
+            if(figura.getPosition().charAt(1)>s.charAt(1))
+                k=1;
+            else if(figura.getPosition().charAt(1)>s.charAt(1))
+                k=-1;
+            if(figura.getPosition().charAt(0)>s.charAt(0))
+                j=1;
+            else j=-1;
+            int a = i.charAt(0), b = i.charAt(1);
+            a+=k;
+            b+=j;
+            i = new String(Character.toChars(a));
+            i += new String(Character.toChars(b));
+            while (!i.equals(s)) {
+                if (!praznaPozicija(i))
+                    return false;
+                a = i.charAt(0);
+                a+=k;
+                b = i.charAt(1);
+                b+=j;
+                i = new String(Character.toChars(a));
+                i += new String(Character.toChars(b));
+            }
+        }
         return true;
     }
 
