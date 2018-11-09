@@ -3,8 +3,6 @@ import java.util.HashMap;
 import ba.unsa.etf.rpr.Queen;
 
 public class Board {
-    private boolean bijeliUIgri, crniUIgri;
-    private int brojBijelih, brojCrnih;
     private HashMap<String, ChessPiece> sahovskaPloca;
 
 
@@ -42,10 +40,6 @@ public class Board {
         sahovskaPloca.put("f7" ,new Pawn("F7", ChessPiece.Color.BLACK));
         sahovskaPloca.put("g7" ,new Pawn("G7", ChessPiece.Color.BLACK));
         sahovskaPloca.put("h7" ,new Pawn("H7", ChessPiece.Color.BLACK));
-        brojBijelih=16;
-        brojCrnih=16;
-        bijeliUIgri=true;
-        crniUIgri=true;
     }
 
     public void move(Class type, ChessPiece.Color color, String position) throws IllegalChessMoveException{
@@ -77,9 +71,6 @@ public class Board {
                         if(sahovskaPloca.get(position.toLowerCase()) != null)
                             sahovskaPloca.remove(position.toLowerCase());
                         x.getValue().move(position.toUpperCase());
-
-                        System.out.println(x.getValue().getPosition());
-
                         sahovskaPloca.put(position.toLowerCase(), x.getValue());
                         sahovskaPloca.remove(x.getKey());
                         return;
