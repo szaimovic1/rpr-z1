@@ -34,7 +34,7 @@ public class Bishop extends ChessPiece{
             i += new String(Character.toChars(b));
             brojac++;
         }
-        return false;                                                             //da li je ovim regulisan i - ?????
+        return false;
     }
 
     Bishop(String pozicija, ChessPiece.Color boja){
@@ -68,9 +68,4 @@ public class Bishop extends ChessPiece{
         Bishop figura = (Bishop) o;
         return (boja==figura.getColor());
     }
-
-    /*@Override
-    public boolean provjeriPutanju(String s){
-        return true;
-    }*/
 }

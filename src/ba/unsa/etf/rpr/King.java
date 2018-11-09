@@ -55,15 +55,4 @@ public class King extends ChessPiece {
         King figura = (King)o;
         return (boja==figura.getColor());
     }
-
-    /*@Override
-    public boolean provjeriPutanju(String s){
-        return true;
-    }*/
-
-    public boolean provjeriSah(){
-        //pozivati sve provjeri putanju za sve figure..
-
-        return true;
-    }
 }

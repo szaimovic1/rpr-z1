@@ -10,8 +10,8 @@ public class Knight extends  ChessPiece{
                 (this.pozicija.charAt(1)+2==pozicija.charAt(1) || this.pozicija.charAt(1)-2==pozicija.charAt(1)))
             || ((this.pozicija.charAt(1)+1==pozicija.charAt(1) || this.pozicija.charAt(1)-1==pozicija.charAt(1)) &&
                 (this.pozicija.charAt(0)+2==pozicija.charAt(0) || this.pozicija.charAt(0)-2==pozicija.charAt(0))))
-            return false;                                                //upozorenje-can be simplified..
-        return true;                                                     //kako najlakse razmotriti sve kombinacije?????
+            return false;
+        return true;
     }
 
     Knight(String pozicija, ChessPiece.Color boja){
@@ -45,9 +45,4 @@ public class Knight extends  ChessPiece{
         Knight figura = (Knight) o;
         return (boja==figura.getColor());
     }
-
-    /*@Override
-    public boolean provjeriPutanju(String s){
-        return true;
-    }*/
 }

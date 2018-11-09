@@ -43,9 +43,4 @@ public class Rook extends ChessPiece {
         Rook figura = (Rook)o;
         return (boja==figura.getColor());
     }
-
-    /*@Override
-    public boolean provjeriPutanju(String s){
-        return true;
-    }*/
 }
